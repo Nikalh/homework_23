@@ -13,12 +13,14 @@ CMD_TO_UTILS = {
 }
 
 
+# запускаем генератор
 def iter_file(file_name: str):
     with open(file_name) as file:
         for line in file:
             yield line
 
 
+# собираем данные
 def query_builder(cmd, value, data: Optional[Iterable[str]]):
     if data is None:
         prepared_data = iter_file(FILE_NAME)
@@ -26,20 +28,3 @@ def query_builder(cmd, value, data: Optional[Iterable[str]]):
         prepared_data = data
     result = CMD_TO_UTILS[cmd](param=value, data=prepared_data)
     return list(result)
-    # gen = iter_file(FILE_NAME)
-    # filtered = list(filter_query(value, gen))
-    # mapped = list(map_query('0', filtered))
-    # unique = list(unique_query(mapped))
-    # sort = list(sort_query(param='desc', data=unique))
-    # limit = list(limit_query(param=2, data=sort))
-    # return limit
-
-    # while True:
-    #
-    #
-    #     try:
-    #         data = next(gen)
-    #         print(data)
-    #     except StopIteration:
-    #         break
-
