@@ -1,4 +1,4 @@
-from typing import Optional, Iterable, List
+from typing import Optional, Iterable, List, Generator
 
 from utils import filter_query, map_query, unique_query, sort_query, limit_query, regex_query
 
@@ -22,7 +22,7 @@ def iter_file(file_name: str):
 
 
 # собираем данные
-def query_builder(cmd, value, data: Optional[Iterable[str]]):
+def query_builder(cmd, value, data: Optional[Iterable[str]]) :
     if data is None:
         prepared_data = iter_file(FILE_NAME)
     else:
