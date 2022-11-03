@@ -1,6 +1,6 @@
-from typing import Optional, Iterable
+from typing import Optional, Iterable, List
 
-from utils import filter_query, map_query, unique_query, sort_query, limit_query
+from utils import filter_query, map_query, unique_query, sort_query, limit_query, regex_query
 
 FILE_NAME = 'data/apache_logs.txt'
 CMD_TO_UTILS = {
@@ -9,6 +9,7 @@ CMD_TO_UTILS = {
     'unique': unique_query,
     'sort': sort_query,
     'limit': limit_query,
+    'regex': regex_query,
 
 }
 
@@ -27,4 +28,5 @@ def query_builder(cmd, value, data: Optional[Iterable[str]]):
     else:
         prepared_data = data
     result = CMD_TO_UTILS[cmd](param=value, data=prepared_data)
+
     return list(result)

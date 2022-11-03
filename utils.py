@@ -1,4 +1,5 @@
-from typing import Union, Generator, List, Iterable
+import re
+from typing import Union, Generator, List, Iterable, Optional
 
 
 def filter_query(param: str, data: Union[Generator, List[str]]):
@@ -21,3 +22,8 @@ def sort_query(param: str, data: Iterable[str]):
 def limit_query(param: str, data: Iterable[str]):
     limit = int(param)
     return list(data)[:limit]
+
+
+def regex_query(param: str, data: Iterable[str]):
+    filtered_values = filter(lambda v: re.match(param, v), data)
+    return list(filtered_values)
